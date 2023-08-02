@@ -1,17 +1,17 @@
 <template>
   <TheHeader />
-  <StoredResources />
+  <TheResources />
 </template>
 
 <script>
-  import TheHeader from './components/layout/TheHeader.vue';
-  import StoredResources from './components/learning-resources/StoredResources.vue';
+  import TheHeader from './components/layouts/TheHeader.vue';
+  import TheResources from './components/learning-resources/TheResources.vue';
 
   export default {
     name: 'App',
     components: {
       TheHeader,
-      StoredResources,
+      TheResources,
     },
   }
 </script>

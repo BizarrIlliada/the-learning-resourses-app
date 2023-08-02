@@ -1,7 +1,7 @@
 <template>
   <header>
     <h1>
-      Header
+      {{ title }}
     </h1>
   </header>
 </template>
@@ -9,6 +9,13 @@
 <script>
   export default {
     name: 'TheHeader',
+    props: {
+      title: {
+        type: String,
+        required: false,
+        default: 'Learning resources',
+      }
+    }
   }
 </script>
 

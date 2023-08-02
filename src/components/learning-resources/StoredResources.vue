@@ -1,7 +1,7 @@
 <template>
   <ul>
     <LearningResource
-      v-for="resource in storedResources"
+      v-for="resource in resources"
       :key="resource.id"
       :link="resource.link"
       :title="resource.title"
@@ -18,25 +18,12 @@
     components: {
       LearningResource,
     },
-
-    data() {
-      return {
-        storedResources: [
-          {
-            id: '1',
-            title: 'Official Guide',
-            description: 'The official Vue.js documentation.',
-            link: 'https://vuejs.org',
-          },
-          {
-            id: '2',
-            title: 'Google',
-            description: 'Learn to Google',
-            link: 'https://google.org',
-          },
-        ],
+    props: {
+      resources: {
+        type: Array,
+        required: true,
       }
-    },
+    }
   }
 </script>
 
