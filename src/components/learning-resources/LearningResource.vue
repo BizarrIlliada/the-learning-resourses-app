@@ -3,7 +3,7 @@
     <BaseCard>
       <header>
         <h3>{{ title }}</h3>
-        <BaseButton mode="flat">
+        <BaseButton mode="flat" @click="deleteResource">
           Delete
         </BaseButton>
       </header>
@@ -33,6 +33,12 @@
         type: String,
         required: true,
       },
+    },
+
+    methods: {
+      deleteResource() {
+        console.log('deleted');
+      }
     },
   }
 </script>

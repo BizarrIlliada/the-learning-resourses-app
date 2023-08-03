@@ -82,7 +82,10 @@
         })
 
         this.activeTab = StoredResources.name;
-      }
+      },
+      deleteResource(id) {
+        this.storedResources = this.storedResources.filter(resource => resource.id !== id)
+      },
     },
   }
 </script>

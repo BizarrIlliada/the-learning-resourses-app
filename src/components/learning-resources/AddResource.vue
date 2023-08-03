@@ -1,4 +1,15 @@
 <template>
+  <Teleport v-if="dialogIsVisible" to="body">
+    <BaseDialog @close="closeDialog" title="Invalid input!">
+      <template #default>
+        <p>Unfortunately, at least one input value is invalid...</p>
+        <p>Please, check all inputs and make sure all entered data is correct.</p>
+      </template>
+      <template #actions>
+        <BaseButton @click="closeDialog">Okay</BaseButton>
+      </template>
+    </BaseDialog>
+  </Teleport>
   <BaseCard>
     <form @submit.prevent="submitData">
       <div class="form-control">
@@ -22,7 +33,7 @@
       <div class="form-control">
         <label for="addResourceFormLinkInput">Link:</label>
         <input
-          type="text"
+          type="url"
           name="link"
           id="addResourceFormLinkInput"
           ref="linkInput"
@@ -48,7 +59,9 @@
     },
 
     data() {
-      return {}
+      return {
+        dialogIsVisible: false,
+      }
     },
 
     methods: {
@@ -57,11 +70,21 @@
         const enteredDescription = this.$refs.descriptionInput.value;
         const enteredLink = this.$refs.linkInput.value;
 
+        if (!enteredTitle.trim() || !enteredDescription.trim() || !enteredLink.trim()) {
+          this.dialogIsVisible = true;
+
+          return;
+        }
+
         this.addResource(enteredTitle, enteredDescription, enteredLink)
 
         this.$refs.titleInput.value = '';
         this.$refs.descriptionInput.value = '';
         this.$refs.linkInput.value = '';
+      },
+
+      closeDialog() {
+        this.dialogIsVisible = false;
       },
     },
   }
