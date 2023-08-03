@@ -3,13 +3,13 @@
     <BaseCard>
       <header>
         <h3>{{ title }}</h3>
-        <BaseButton mode="flat" @click="deleteResource">
+        <BaseButton mode="flat" @click="deleteResource(id)">
           Delete
         </BaseButton>
       </header>
       <p>{{ description }}</p>
       <nav>
-        <a :href="link">
+        <a :href="link" target="_blank">
           View resource
         </a>
       </nav>
@@ -21,6 +21,10 @@
   export default {
     name: 'LearningResource',
     props: {
+      id: {
+        type: Number,
+        required: true,
+      },
       link: {
         type: String,
         require: true,
@@ -34,10 +38,10 @@
         required: true,
       },
     },
-
-    methods: {
-      deleteResource() {
-        console.log('deleted');
+    inject: {
+      deleteResource: {
+        type: Function,
+        required: true,
       }
     },
   }

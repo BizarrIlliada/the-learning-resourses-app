@@ -36,13 +36,13 @@
         activeTab: 'StoredResources',
         storedResources: [
           {
-            id: '1',
+            id: 1,
             title: 'Official Guide',
             description: 'The official Vue.js documentation.',
             link: 'https://vuejs.org',
           },
           {
-            id: '2',
+            id: 2,
             title: 'Google',
             description: 'Learn to Google',
             link: 'https://google.org',
@@ -55,6 +55,7 @@
       return {
         resources: this.storedResources,
         addResource: this.addResource,
+        deleteResource: this.deleteResource,
       }
     },
 
@@ -83,8 +84,10 @@
 
         this.activeTab = StoredResources.name;
       },
-      deleteResource(id) {
-        this.storedResources = this.storedResources.filter(resource => resource.id !== id)
+      deleteResource(resId) {
+        const index = this.storedResources.findIndex(res => res.id === resId);
+
+        this.storedResources.splice(index, 1);
       },
     },
   }

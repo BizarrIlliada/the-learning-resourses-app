@@ -1,15 +1,13 @@
 <template>
-  <Teleport v-if="dialogIsVisible" to="body">
-    <BaseDialog @close="closeDialog" title="Invalid input!">
-      <template #default>
-        <p>Unfortunately, at least one input value is invalid...</p>
-        <p>Please, check all inputs and make sure all entered data is correct.</p>
-      </template>
-      <template #actions>
-        <BaseButton @click="closeDialog">Okay</BaseButton>
-      </template>
-    </BaseDialog>
-  </Teleport>
+  <BaseDialog v-if="dialogIsVisible" @close="closeDialog" title="Invalid input!">
+    <template #default>
+      <p>Unfortunately, at least one input value is invalid...</p>
+      <p>Please, check all inputs and make sure all entered data is correct.</p>
+    </template>
+    <template #actions>
+      <BaseButton @click="closeDialog">Okay</BaseButton>
+    </template>
+  </BaseDialog>
   <BaseCard>
     <form @submit.prevent="submitData">
       <div class="form-control">
