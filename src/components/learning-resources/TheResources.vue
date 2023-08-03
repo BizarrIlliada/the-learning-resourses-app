@@ -1,15 +1,23 @@
 <template>
   <BaseCard>
     <nav>
-      <BaseButton @click="setActiveTab($.components.StoredResources.name)">
+      <BaseButton
+        @click="setActiveTab($.components.StoredResources.name)"
+        :mode="storeResButtonMode"
+      >
         Stored Resources
       </BaseButton>
-      <BaseButton @click="setActiveTab($.components.AddResource.name)">
+      <BaseButton
+        @click="setActiveTab($.components.AddResource.name)"
+        :mode="addResButtonMode"
+      >
         Add resource
       </BaseButton>
     </nav>
   </BaseCard>
-  <component :is="activeTab" :resources="storedResources"></component>
+  <KeepAlive>
+    <component :is="activeTab"></component>
+  </KeepAlive>
 </template>
 
 <script>
@@ -43,16 +51,39 @@
       }
     },
 
-    methods: {
-      setActiveTab(tab) {
-        this.activeTab = tab;
-        console.log(tab);
+    provide() {
+      return {
+        resources: this.storedResources,
+        addResource: this.addResource,
+      }
+    },
+
+    computed: {
+      storeResButtonMode() {
+        return this.activeTab === StoredResources.name ? '' : 'flat';
+      },
+      addResButtonMode() {
+        return this.activeTab === AddResource.name ? '' : 'flat';
       },
     },
 
-    mounted() {
-      console.log(this);
-    }
+    methods: {
+      setActiveTab(tab) {
+        if (tab !== this.activeTab) {
+          this.activeTab = tab;
+        }
+      },
+      addResource(title, description, link) {
+        this.storedResources.unshift({
+          id: new Date().getTime(),
+          title,
+          description,
+          link,
+        })
+
+        this.activeTab = StoredResources.name;
+      }
+    },
   }
 </script>
 
